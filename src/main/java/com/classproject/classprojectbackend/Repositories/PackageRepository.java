@@ -16,10 +16,11 @@ import javax.transaction.Transactional;
 public interface PackageRepository  extends CrudRepository<PostRequirement,Integer> {
 
     @Modifying
-    @Query("update Packages p set p.packageName = ?1,p.price=?2,p.description=?3 where p.packageId = ?4")
-    void updatePackage(String packageName, String price,String description,int packageId);
+    @Query("update Packages p set p.packageName = ?1,p.price=?2,p.description=?3,p.adv=?4 where p.packageId = ?5")
+    void updatePackage(String packageName, String price,String description,String adv,int packageId);
 
     @Query(value = "SELECT * FROM packages where packageId = ?1 ", nativeQuery = true)
     public Object getPackage(int Id);
 
 }
+

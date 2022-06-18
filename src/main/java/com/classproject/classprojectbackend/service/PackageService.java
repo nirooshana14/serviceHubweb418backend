@@ -23,8 +23,9 @@ public class PackageService {
 
 
 
-    public void updatePackage(String packageName, String price,String description,int packageId) {
+    public void updatePackage(String packageName, String price,String description,String adv,int packageId) {
 
-        packageRepository.updatePackage(packageName,price,description,packageId);
+        packageRepository.updatePackage(packageName,price,description,adv,packageId);
     }
 }
+

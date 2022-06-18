@@ -343,23 +343,32 @@ public class UserControler {
 
     }
 
-    @GetMapping("/updatePackage/{packageName},{price},{description},{packageId}")
-    public ResponseEntity<String> updatePackage(@PathVariable("packageName") String packageName,
-                                                        @PathVariable("price") String price,
-                                                       @PathVariable("description") String description,
-                                                        @PathVariable("packageId") int packageId
+    @PostMapping("/updatePackage")
+    public ResponseEntity<String> updatePackage(@RequestParam("packageName")  String packageName,
+                                                @RequestParam("price") String price,
+                                                @RequestParam("description") String description,
+                                                @RequestParam("adv") String adv,
+                                                @RequestParam("packageId") int packageId
 
     ) {
 
         try {
+            System.out.println(packageName);
+            System.out.println(price);
+            System.out.println(description);
+            System.out.println(packageId);
 
-            packageService.updatePackage(packageName, price,description,packageId);
+            System.out.println(adv);
+
+            packageService.updatePackage(packageName, price,description,adv,packageId);
 
             return new ResponseEntity<String>("Sucessfully Package Details Updated", HttpStatus.OK);
 
 
         } catch (Exception ex) {
+            System.out.println(ex);
             ex.getMessage();
+
         }
         return null;
     }
@@ -465,6 +474,21 @@ public class UserControler {
 
     @PostMapping("/saveImge")
     public ResponseEntity<String> saveAttachment(@RequestParam("image") MultipartFile multipartFile) {
+        try {
+            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
+            String uploadDir = "attachments/";
+
+            saveFile(uploadDir, fileName, multipartFile);
+
+            return new ResponseEntity<String>(uploadDir + fileName, HttpStatus.OK);
+        } catch (Exception ex) {
+            return new ResponseEntity<String>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+
+    }
+
+    @PostMapping("/saveImge2")
+    public ResponseEntity<String> saveAttachment2(@RequestParam("adv") MultipartFile multipartFile) {
         try {
             String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());
             String uploadDir = "attachments/";

@@ -32,10 +32,14 @@ public class Packages {
     @Column(name="description")
     private String description;
 
+
+    @Column(name="adv")
+    private String adv;
+
     public Packages() {
     }
 
-    public Packages(int packageId, String packageName, int templates, int accountsCountPerMonth, String calender, String googleMap, String price, String description) {
+    public Packages(int packageId, String packageName, int templates, int accountsCountPerMonth, String calender, String googleMap, String price, String description, String adv) {
         this.packageId = packageId;
         this.packageName = packageName;
         this.templates = templates;
@@ -44,6 +48,7 @@ public class Packages {
         this.googleMap = googleMap;
         this.price = price;
         this.description = description;
+        this.adv = adv;
     }
 
     public int getPackageId() {
@@ -108,5 +113,13 @@ public class Packages {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getAdv() {
+        return adv;
+    }
+
+    public void setAdv(String adv) {
+        this.adv = adv;
     }
 }
